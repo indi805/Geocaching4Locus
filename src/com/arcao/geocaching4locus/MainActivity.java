@@ -2,7 +2,6 @@ package com.arcao.geocaching4locus;
 
 import menion.android.locus.addon.publiclib.LocusIntents;
 import menion.android.locus.addon.publiclib.LocusIntents.OnIntentMainFunction;
-import menion.android.locus.addon.publiclib.LocusIntentsPatch;
 import menion.android.locus.addon.publiclib.LocusUtils;
 import menion.android.locus.addon.publiclib.geoData.Point;
 
@@ -44,7 +43,7 @@ import com.arcao.geocaching4locus.util.Coordinates;
 public class MainActivity extends Activity implements LocationListener, OnIntentMainFunction {
 	private static final String TAG = "Geocaching4Locus|MainActivity";
 	
-	private static final Version LOCUS_MIN_VERSION = Version.parseVersion("1.10.1");
+	private static final Version LOCUS_MIN_VERSION = Version.parseVersion("1.14.6.6");
 
 	private Resources res;
 	private LocationManager locationManager;
@@ -89,7 +88,7 @@ public class MainActivity extends Activity implements LocationListener, OnIntent
 
 		setContentView(R.layout.main_activity);
 
-		if (LocusIntentsPatch.isIntentOnPointAction(getIntent())) {
+		if (LocusIntents.isIntentOnPointAction(getIntent())) {
 			Point p = LocusIntents.handleIntentOnPointAction(getIntent());
 			if (p == null) {
 				Toast.makeText(this, "Wrong INTENT - no point!", Toast.LENGTH_SHORT).show();
@@ -101,7 +100,7 @@ public class MainActivity extends Activity implements LocationListener, OnIntent
 				hasCoordinates = true;
 			}
 		}
-		if (LocusIntentsPatch.isIntentMainFunction(getIntent())) {
+		if (LocusIntents.isIntentMainFunction(getIntent())) {
 			LocusIntents.handleIntentMainFunction(getIntent(), this);
 		}
 	}
